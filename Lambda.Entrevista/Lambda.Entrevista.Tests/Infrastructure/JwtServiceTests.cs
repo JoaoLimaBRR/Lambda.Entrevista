@@ -48,7 +48,10 @@ namespace Lambda.Entrevista.Tests.Infrastructure
         [Fact]
         public async Task GerarTokenBase64Async_DeveGerarToken_QuandoEntrevistaValida()
         {
-            Arrange();
+            Arrange(() =>
+            {
+                Environment.SetEnvironmentVariable("NOME_SECRET_JWT", "nome123");
+            });
 
             var entrevista = new EntrevistaEntity
             {

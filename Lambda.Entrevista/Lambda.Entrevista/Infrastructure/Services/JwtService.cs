@@ -65,8 +65,6 @@ namespace Lambda.Entrevista.Infrastructure.Services
 
         private async Task<string> ObterValorSegredoAsync()
         {
-            return Guid.NewGuid().ToString();
-
             if (!string.IsNullOrEmpty(_valorCacheadoDoSegredo) && DateTime.UtcNow < _expiraCacheEmUtc)
                 return _valorCacheadoDoSegredo;
 

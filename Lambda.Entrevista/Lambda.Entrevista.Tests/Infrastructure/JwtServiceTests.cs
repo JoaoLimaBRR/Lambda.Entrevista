@@ -68,8 +68,10 @@ namespace Lambda.Entrevista.Tests.Infrastructure
                 var tokenBytes = Convert.FromBase64String(tokenBase64);
                 var tokenString = Encoding.UTF8.GetString(tokenBytes);
                 var manipuladorToken = new JwtSecurityTokenHandler();
-                var teste = manipuladorToken.ReadJwtToken(tokenString);
-                Assert.Contains("lambda.entrevista", teste.Issuer);
+                var token = manipuladorToken.ReadJwtToken(tokenString);
+                Assert.Contains("lambda.entrevista", token.Issuer);
+                Assert.Equal(DateTime.Now.AddDays(5).Date, token.ValidTo.Date);
+                Assert.Equal(DateTime.Now.Date, token.ValidFrom.Date);
             });
         }
 

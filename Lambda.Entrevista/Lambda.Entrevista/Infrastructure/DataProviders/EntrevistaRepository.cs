@@ -11,7 +11,7 @@ namespace Lambda.Entrevista.Infrastructure.DataProviders
         private readonly IDynamoDBContext _contexto;
 
 
-        public EntrevistaRepository(IAmazonDynamoDB clienteDynamo)
+        public EntrevistaRepository(IAmazonDynamoDB clienteDynamo, IDynamoDBContext contexto)
         {
             _clienteDynamo = clienteDynamo ?? throw new ArgumentNullException(nameof(clienteDynamo));
             var config = new DynamoDBContextConfig { Conversion = DynamoDBEntryConversion.V2 };
@@ -27,7 +27,6 @@ namespace Lambda.Entrevista.Infrastructure.DataProviders
 
         public async Task SalvarAsync(EntrevistaEntity entidade, CancellationToken cancellationToken = default)
         {
-            return;
             if (entidade == null) throw new ArgumentNullException(nameof(entidade));
 
             await _contexto.SaveAsync(entidade, cancellationToken).ConfigureAwait(false);
